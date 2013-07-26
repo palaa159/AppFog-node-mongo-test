@@ -1,0 +1,10 @@
+{
+  "name": "app",
+  "description": "hello world test app",
+  "version": "0.0.1",
+  "dependencies": {
+    "socket.io" : "0.9.12",
+    "knox" : "*",
+    "s3" : "*"
+  }
+}
