@@ -1,0 +1,55 @@
+#takeVid {
+	width:320px;
+	height:240px;
+	text-align:center;
+}
+
+#video {
+	position:relative;
+}
+
+#videoOut {
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:0;
+	width:320px;
+	height:240px;
+	background:#000;
+	transform:scale(-1,1);
+	-ms-transform:scale(-1,1);
+/* IE 9 */
+	-webkit-transform:scale(-1,1);
+/* Safari and Chrome */
+}
+
+#headSilhouette {
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:1;
+	background:url(img/head_silhouette.png);
+	width:320px;
+	height:240px;
+	opacity:.4;
+	background-size:cover;
+}
+
+#imgCanvas {
+	display:none;
+}
+
+#retake {
+	display:none;
+}
+
+#result {
+	display:none;
+}
+
+#videoWrapper {
+	height:240px;
+}
+
+.infoShoot {
+}

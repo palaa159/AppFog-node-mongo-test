@@ -6,61 +6,10 @@
 		<title></title>
 		<meta name="description" content="">
 		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="css/style.css">
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="js/connect.js"></script>
-		<style>
-		#takeVid {
-			width:320px;
-			height:240px;
-			text-align: center;
-		}
-		
-		#video {
-			position: relative;
-		}
-		
-			#videoOut {
-	position: absolute;
-	top:0;
-	left:0;
-	z-index: 0;
-    width: 320px;
-    height: 240px;
-    background: #000;
-    transform:scale(-1,1);
--ms-transform:scale(-1,1); /* IE 9 */
--webkit-transform:scale(-1,1); /* Safari and Chrome */
-}
-	#headSilhouette {
-		position: absolute;
-		top:0; left:0;
-		z-index: 1;
-		background: url('img/head_silhouette.png');
-		width: 320px;
-		height: 240px;
-		opacity: 0.4;
-		background-size: cover;
-	}
-	
-	#imgCanvas {
-		display: none;
-	}
-	
-	#retake {
-		display: none;
-	}
-	
-	#result {
-		display: none;
-	}
-	#videoWrapper {
-		height: 240px;
-	}
-	.infoShoot {
-		
-	}
-		</style>
 	</head>
 	<body>
 		<h1>Hello take a pic</h1>
@@ -78,8 +27,6 @@
 			<p class="infoShoot">Hit a spacebar to shoot</p>
 			<button id="retake">re-take</button>
 		</section>
-		<script src="js/io.js">
-			
-		</script>
+		<script src="js/io.js"></script>
 	</body>
 </html>

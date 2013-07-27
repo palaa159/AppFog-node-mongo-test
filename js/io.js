@@ -53,8 +53,8 @@ $(document).keypress(function(e) {
 	$('#result').fadeIn();
 	$('.infoShoot').fadeOut();
 	$('#retake').fadeIn();
-	// upload
-	socket.emit('img upload', upload_image);
+	
+	socket.emit('file upload', upload_image);
 	}
 });
 
@@ -65,4 +65,11 @@ $('#retake').click(function() {
 	$('.infoShoot').fadeIn();
 	$('#result').fadeIn();
 	$('#video').fadeIn();
+});
+
+/// final upload
+// check with mongo
+
+socket.on('upload success', function(data) {
+	console.log(data.msg + ", URL: " + data.imgurl);
 });
