@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="css/style.css">
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
+		<script src="js/recorder.js"></script>
 		<script src="js/connect.js"></script>
 	</head>
 	<body>
@@ -24,8 +25,19 @@
 				<img src="" width="240" height="240">
 			</div>
 			</div>
-			<p class="infoShoot">Hit a spacebar to shoot</p>
+			<p class="info">Hit a spacebar to shoot</p>
 			<button id="retake">re-take</button>
+			<button id="satisfied" style="display:none">Next</button>
+		</section>
+		<section id="recAudio">
+			<p class="info"></p>
+			<audio autoplay control></audio>
+			<h3 class="sayAhh">Say Ahhhhh...</h3>
+		</section>
+		<section id="finalize">
+			<button id="publicPic">You want to show your face</button>
+			<button id="privatePic">Make your picture private (pixelated)</button>
+			<button id="upload">Upload</button>
 		</section>
 		<script src="js/io.js"></script>
 	</body>

@@ -87,31 +87,57 @@ io.sockets.on('connection', function(socket) {
 	socket.on('my other event', function(data) {
 		console.log(data);
 	});
-	socket.on('file upload', function(img) {
+	socket.on('file upload', function(data) {
 		userDB.find().toArray(function(err, result) {
 			if (err) throw err;
 			var nextId = result.length + 1;
 			console.log('the next id is: ' + nextId);
-			var buf = new Buffer(img.replace(/^data:image\/\w+;base64,/, ""), 'base64'),
+			var buf_image = new Buffer(data.image.replace(/^data:image\/png;base64,/, ""), 'base64'),
+				buf_audio = new Buffer(data.audio.replace(/^data:audio\/wav;base64,/, ""), 'base64'),
 				filename = '00' + nextId;
-			var req = client.put('/images/' + filename + '.png', {
-				'Content-Length': buf.length,
+			var req_image = client.put('/images/' + filename + '.png', {
+				'Content-Length': buf_image.length,
 				'Content-Type': 'image/png'
 			});
-			req.on('response', function(res) {
+			req_image.on('response', function(res) {
 				if (res.statusCode == 200) {
-					console.log('saved to %s', req.url);
+					console.log('saved to %s', req_image.url);
 					// saving to db
-					socket.emit('upload success', {
-						'imgurl': req.url,
+					socket.emit('image upload success', {
+						'imgurl': req_image.url,
 						'msg': 'done.'
 					});
 				} else {
-					console.log('error %d', req.statusCode);
+					console.log('error %d', req_image.statusCode);
 					socket.emit('upload error');
 				}
 			});
-			req.end(buf);
+			req_image.end(buf_image);
+			// upload audio
+			var req_audio = client.put('/audio/' + filename + '.wav', {
+				'Content-Length': buf_audio.length,
+				'Content-Type': 'image/wav'
+			});
+			req_audio.on('response', function(res) {
+				if (res.statusCode == 200) {
+					console.log('saved to %s', req_audio.url);
+					// saving to db
+					socket.emit('audio upload success', {
+						'audiourl': req_audio.url,
+						'msg': 'done.'
+					});
+					//save to mongo
+					userDB.save({
+						'id': '00' + nextId,
+						'public': data.pulicOk,
+						'ts': new Date()
+					});
+				} else {
+					console.log('error %d', req_audio.statusCode);
+					socket.emit('upload error');
+				}
+			});
+			req_audio.end(buf_audio);
 		});
 	});
-	});
+});
