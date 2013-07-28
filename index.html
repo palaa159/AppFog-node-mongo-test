@@ -9,39 +9,17 @@
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/style.css">
 		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+		<script src="js/raphael-min.js"></script>
+		<script src="js/webkitaudio.js"></script>
 		<script src="/socket.io/socket.io.js"></script>
 		<script src="js/connect.js"></script>
-		<script src="js/queryData.js"></script>
 	</head>
 	<body>
 		<div id="wrapper">
 			<section id="faceGrid">
-				<img id="faceForClone" class="oneFace"></div>
+				<div id="faceRender"></div>
 			</section>
 		</div>
-		<script>
-			var scrWidth = window.innerWidth,
-				scrHeight = window.innerHeight;
-			window.onload = function() {
-				bodyChange();
-			}
-			function bodyChange() {
-				$('body').css({
-					'width': scrWidth,
-					'height': scrHeight
-				});
-				$('.oneFace').animate({
-					'width': scrWidth/6,
-					'height': scrWidth/6
-				},50);
-			}
-			
-			window.addEventListener('resize', onResize, false);
-			function onResize() {
-				scrWidth = window.innerWidth,
-				scrHeight = window.innerHeight;
-				bodyChange();
-			}
-		</script>
+		<script src="js/queryData.js"></script>
 	</body>
 </html>
