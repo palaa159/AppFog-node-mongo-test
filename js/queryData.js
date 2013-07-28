@@ -1,28 +1,51 @@
 var scrWidth = window.innerWidth,
 	scrHeight = window.innerHeight,
 	faceSize = scrWidth / 8;
-var paper = Raphael("faceRender", scrWidth, scrHeight);
+var canvas = new Kinetic.Stage({
+        container: 'faceRender',
+        width: scrWidth,
+        height: scrHeight
+      }),
+      layer = new Kinetic.Layer();
+var context = layer.getCanvas().getContext('2d');
 window.onload = function() {
 	bodyChange();
 };
 
 var faceData;
 var faceArray = [];
+var facePixel8Array = [];
 socket.emit('req data');
 socket.on('req result', function(data) {
 	faceData = data;
 	console.log(faceData);
+	// display facedata
 	$.each(faceData, function(index, value) {
-		faceArray[index] = paper.image('https://singyourface.s3.amazonaws.com/images/' + value.id + '.png', index*faceSize, 0, faceSize, faceSize);
-	});
-	// add mouse event
-	$.each(faceArray, function(index, value) {
-		faceArray[index].mouseover(function(e){
-			// pixel8
-			var imageData = faceArray[index].getImageData();
+		var imgObj = new Image();
+		imgObj.src = 'https://s3.amazonaws.com/singyourface/images/' + value.id + '.png';
+		imgObj.onload = function() {
+        faceArray[index] = new Kinetic.Image({
+          x: index*faceSize,
+          y: 0,
+          image: imgObj,
+          width: faceSize,
+          height: faceSize
+        });
+        // bind mouse event
+		faceArray[index].on('mouseover', function() {
+			
 		});
+        // add to layer
+        layer.add(faceArray[index]);
+        // add to stage
+		canvas.add(layer);
+		canvas.toDataURL({
+			callback: function(a) {
+				facePixel8Array[index] = context.getImageData(0,0,10,10);
+			}
+		});
+		};
 	});
-	
 });
 // Resizing handler
 
@@ -31,7 +54,6 @@ function bodyChange() {
 		'width': scrWidth,
 		'height': scrHeight
 	});
-	// translate facedata
 }
 window.addEventListener('resize', onResize, false);
 
