@@ -1,3 +1,30 @@
+/* Index page */
+body {
+	width: 100%;
+	height: 100%;
+}
+
+#wrapper {
+	background: blue;
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+}
+
+#faceGrid {
+	width: 100%;
+	max-width: 100%;
+}
+
+#faceGrid > div {
+	display: inline;
+}
+
+.oneFace {
+	width: 240px;
+	width: 240px;
+}
+/* Add page */
 #takeVid {
 	width:320px;
 	height:240px;

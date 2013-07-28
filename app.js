@@ -129,7 +129,7 @@ io.sockets.on('connection', function(socket) {
 					//save to mongo
 					userDB.save({
 						'id': '00' + nextId,
-						'public': data.pulicOk,
+						'publicOk': data.pulicOk,
 						'ts': new Date()
 					});
 				} else {
@@ -138,6 +138,12 @@ io.sockets.on('connection', function(socket) {
 				}
 			});
 			req_audio.end(buf_audio);
+		});
+	});
+	socket.on('req data', function() {
+		userDB.find().sort({$natural:1}).limit(24).toArray(function(err, result) {
+			if(err) throw err;
+			socket.emit('req result', result);
 		});
 	});
 });
